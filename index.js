@@ -19,7 +19,7 @@ window.onload = function (){
     const h2HoverArr = ["Andrey Grek", "Creating", "I'm working", "Find me telegram", "More"];
     const imgArr = ['img/icons/about.svg', 'img/icons/projects.svg', 'img/icons/tools.svg', 'img/icons/contacts.svg', 'img/icons/future.svg'];
     const imgHoverArr = ['img/me.jpg', '', 'img/code.jpg', 'img/contacts.jpg', 'img/jsonly.jpg'];
-    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Lorem ipsum <br> dolor sitorem ipsum dolor <br> situeorem ipsumatus.', '', ''];
+    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also jquery, react.<br>I can make a design of any complexity.', 'Andrey_Grek', ''];
 
 
     let getEl = function(el){
@@ -73,7 +73,7 @@ window.onload = function (){
                 newElement(".slider-btn", "div", "dust hide");
                 newElement(".slider-btn", "div", "crack hide");
             newElement(".main-slide", "div", "slide active hide", "slide1");
-                newElement("#slide1", "a", "href hide", "", "Check site", "", "href", "https://google.com", "target", "_blank");
+                newElement("#slide1", "a", "href hide", "", "Check site", "", "href", "https://balagan-city.ru/#l-flag", "target", "_blank");
             newElement(".main-slide", "div", "slide not-active hide", "slide2");
                 newElement("#slide2", "a", "href hide", "", "Check site", "", "href", "http://google.com", "target", "_blank");
             newElement(".main-slide", "div", "slide not-active hide", "slide3");
@@ -564,7 +564,7 @@ window.onload = function (){
         ],
         ['#slide1',
             ['perspective', '1px'],
-            ['background-image', 'url(https://i.pinimg.com/originals/b4/bd/d0/b4bdd071a02bbff4803b67d86aa7984c.jpg)'],
+            ['background-image', 'url(img/slider/balagan-map.jpg)'],
         ],
         ['#slide2',
             ['perspective', '2px'],
@@ -585,7 +585,6 @@ window.onload = function (){
             ['border-radius', '150px'],
             ['text-align', 'center'],
             ['padding', '16px'],
-            ['user-select', 'none'],
         ],
         ['.slider-btn',
             ['width', '70px'],
@@ -611,6 +610,7 @@ window.onload = function (){
             ['cursor', 'none'],
             ['border-radius', '150px'], 
             ['opacity', '0'],
+            ['user-select', 'none'],
         ],
         ['.perspective',
             ['index', '2'],
@@ -688,6 +688,9 @@ window.onload = function (){
             ['z-index', '-1'],
             ['border-radius', '0px'], 
             ['background-color', 'rgba(0, 0, 0, .1)'], 
+        ],
+        ['#contacts span',
+            ['color', '#fff'],
         ],
 
         //FUTURE
