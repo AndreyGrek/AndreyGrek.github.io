@@ -16,7 +16,7 @@ var nodeDoctype = document.implementation.createDocumentType(
 window.onload = function (){
 
     const h2Arr = ["About", "Projects", "Tools", "Contacts", "Future"];
-    const h2HoverArr = ["Andrey Grek", "Creating", "I'm working", "Find me telegram", "More"];
+    const h2HoverArr = ["Andrey Grek", "My best jobs", "I'm working", "Find me telegram", "More"];
     const imgArr = ['img/icons/about.svg', 'img/icons/projects.svg', 'img/icons/tools.svg', 'img/icons/contacts.svg', 'img/icons/future.svg'];
     const imgHoverArr = ['img/me.jpg', '', 'img/code.jpg', 'img/contacts.jpg', 'img/jsonly.jpg'];
     const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also jquery, react.<br>I can make a design of any complexity.', 'Andrey_Grek', ''];
@@ -539,6 +539,10 @@ window.onload = function (){
         ['#projects',
             ['cursor', 'none'],
         ],
+        ['#projects h2',
+            ['position', 'relative'],
+            ['z-index', '5'],
+        ],
         ['.main-slide',
             ['width', '100%'],
             ['height', '100%'],
@@ -546,12 +550,16 @@ window.onload = function (){
             ['top', '0px'],
             ['perspective', '2400px'],
             ['perspective-origin', '150% 150%'],
+            ['background', 'linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),\
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),\
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);'],
         ],
         ['.slide',
             ['width', '100%'],
             ['height', '100%'],
             ['position', 'absolute'],
-            ['background-size', 'cover'],
+            ['background-color', 'rgba(0, 0, 0, 0)'],
+            ['background-size', 'contain'],
             ['background-repeat', 'no-repeat'],
             ['background-position', 'center'],
             ['transition', '.5s all'],
