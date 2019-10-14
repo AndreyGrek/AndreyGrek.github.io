@@ -30,7 +30,7 @@ window.onload = function (){
     }
 
     //конструктор элементов
-    const newElement = function(parrent, tag, className, id, text, urlBg, attr, attrValue, attr2, attrValue2){
+    const newElement = function(parrent, tag, className, id, text, urlBg, attr, attrValue, attr2, attrValue2, attr3, attrValue3){
         let parrentEl = document.querySelector(parrent); //присваиваем родителя
         let el = document.createElement(tag); //создаём новый элемент
         if (className){
@@ -51,10 +51,14 @@ window.onload = function (){
         if (attr2){
             el.setAttribute(attr2, attrValue2);
         }
+        if (attr3){
+            el.setAttribute(attr3, attrValue3);
+        }
         parrentEl.append(el); //выводим в DOM
     }
     
     newElement("head", "title", "", "", "Resume");
+    newElement("head", "link", "", "", "", "", "rel", "shortcut icon", "href", "img/favicon.ico", "type", "image/png");
     newElement("body", "main");
     newElement("main", "section", "item", "about");
         newElement("#about", "h2", "", "", h2Arr[0]);
