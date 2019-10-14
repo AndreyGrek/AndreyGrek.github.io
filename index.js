@@ -16,10 +16,10 @@ var nodeDoctype = document.implementation.createDocumentType(
 window.onload = function (){
 
     const h2Arr = ["About", "Projects", "Tools", "Contacts", "Future"];
-    const h2HoverArr = ["Andrey Grek", "My best jobs", "I'm working", "Find me telegram", "More"];
+    const h2HoverArr = ["Andrey Grek", "", "I'm working", "Find me telegram", "More"];
     const imgArr = ['img/icons/about.svg', 'img/icons/projects.svg', 'img/icons/tools.svg', 'img/icons/contacts.svg', 'img/icons/future.svg'];
     const imgHoverArr = ['img/me.jpg', '', 'img/code.jpg', 'img/contacts.jpg', 'img/jsonly.jpg'];
-    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also jquery, react.<br>I can make a design of any complexity.', 'Andrey_Grek', ''];
+    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also react, jquery, bootstrap.<br>I can make a design of any complexity.', 'Andrey_Grek', ''];
 
 
     let getEl = function(el){
@@ -71,6 +71,7 @@ window.onload = function (){
         newElement("#projects", "div", "item-img hide", "", "", imgHoverArr[1]);
         newElement("#projects", "span", "hide", "", spanHoverArr[1]);
         newElement("#projects", "div", "main-slide hide");
+            newElement(".main-slide", "h2", "slides-title hide", "", "My best jobs");
             newElement(".main-slide", "div", "slider-btn hide");
                 newElement(".slider-btn", "div", "slider-prev hide");
                 newElement(".slider-btn", "div", "slider-next hide");
@@ -146,7 +147,7 @@ window.onload = function (){
             });
         }
         hoveringItems(el("#about"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 2.77777778);
-        hoveringItems(el("#projects"), (bodyWidth / 2) + (bodyWidth / 8 * 2), (bodyWidth / 2) + (bodyWidth / 8), bodyWidth / 8);
+        hoveringItems(el("#projects"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 6.25);
         hoveringItems(el("#tools"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2));
         hoveringItems(el("#contacts")); 
         hoveringItems(el("#future"));
@@ -173,17 +174,17 @@ window.onload = function (){
             el("#contacts").style.left = bodyWidth / 5 * 3;
         });
 
-        el("#projects").addEventListener('mouseenter', () => {      //ширина projects
-            for (let i = 0; i < items.length; i++){
-                items[i].style.width = bodyWidth / 8;
-            }
-            el("#projects").style.width = bodyWidth / 2;
-        });
-        el("#projects").addEventListener('mouseleave', () => {
-            for (let i = 0; i < items.length; i++){
-                items[i].style.width = bodyWidth / 6.25;
-            }
-        });
+        // el("#projects").addEventListener('mouseenter', () => {      //ширина projects
+        //     for (let i = 0; i < items.length; i++){
+        //         items[i].style.width = bodyWidth / 8;
+        //     }
+        //     el("#projects").style.width = bodyWidth / 2;
+        // });
+        // el("#projects").addEventListener('mouseleave', () => {
+        //     for (let i = 0; i < items.length; i++){
+        //         items[i].style.width = bodyWidth / 6.25;
+        //     }
+        // });
     }
     sizing();
     window.addEventListener('resize', sizing);
@@ -201,7 +202,7 @@ window.onload = function (){
     function hoveringInside(className){
 
         let selectClass = document.querySelectorAll(className);
-        let h2 = document.querySelectorAll(className + " h2");
+        let h2 = document.querySelectorAll(className + " > h2");
         let img = document.querySelectorAll(className + " img");
         let divImg = document.querySelectorAll(".item-img");
         let span = document.querySelectorAll(className + " span");
@@ -543,7 +544,7 @@ window.onload = function (){
         ['#projects',
             ['cursor', 'none'],
         ],
-        ['#projects h2',
+        ['#projects > h2',
             ['position', 'relative'],
             ['z-index', '5'],
         ],
@@ -557,6 +558,11 @@ window.onload = function (){
             ['background', 'linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),\
             linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),\
             linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);'],
+        ],
+        ['.slides-title',
+            ['position', 'absolute'],
+            ['text-align', 'center'],
+            ['width', '100%'],
         ],
         ['.slide',
             ['width', '100%'],
@@ -576,15 +582,15 @@ window.onload = function (){
         ],
         ['#slide1',
             ['perspective', '1px'],
-            ['background-image', 'url(img/slider/balagan-map.jpg)'],
+            ['background-image', 'url(img/slider/slide1.jpg)'],
         ],
         ['#slide2',
             ['perspective', '2px'],
-            ['background-image', 'url(https://xubuntu.org/wp-content/uploads/2018/04/8fbb/40103442821_db033c72a4_o-web.jpg)'],
+            ['background-image', 'url(img/slider/slide2.jpg)'],
         ],
         ['#slide3',
             ['perspective', '3px'],
-            ['background-image', 'url(https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMjU4fQ&w=1000&q=80)'],
+            ['background-image', 'url(img/slider/slide3.jpg)'],
         ],
         ['.href',
             ['width', '70px'],
