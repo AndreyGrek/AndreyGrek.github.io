@@ -12,16 +12,23 @@ var nodeDoctype = document.implementation.createDocumentType(
    }
    document.write('<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"></head><body></body></html>');
 
-
+if(document.body.clientWidth < 980){
+    document.body.innerHTML = "Mobile version of the site is under construction. Please come in from the desktop device";
+} else{
 window.onload = function (){
 
-    const h2Arr = ["About", "Projects", "Tools", "Contacts", "Future"];
+    //оглавление разделов 
+    const h2Arr = ["About", "Projects", "Tools", "Contacts", "Comments"];
+    //оглавление после ховера
     const h2HoverArr = ["Andrey Grek", "", "I'm working", "Find me telegram", "More"];
+    //иконки разделов
     const imgArr = ['img/icons/about.svg', 'img/icons/projects.svg', 'img/icons/tools.svg', 'img/icons/contacts.svg', 'img/icons/future.svg'];
+    //иконки после ховера
     const imgHoverArr = ['img/me.jpg', '', 'img/code.jpg', 'img/contacts.jpg', 'img/jsonly.jpg'];
-    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also react, jquery, bootstrap.<br>I can make a design of any complexity.', 'Andrey_Grek', ''];
+    //текст снизу после ховера
+    const spanHoverArr = ['I`m a Frontend JavaScript developer', '', 'Gentleman\'s set - html, css, js.<br>Also git, react, jquery, bootstrap.<br>I can make a design of any complexity.', 'Andrey_Grek', 'Only used vanilla JavaScript'];
 
-
+    //глобальные функции
     let getEl = function(el){
         return document.querySelector(el);
     }
@@ -99,27 +106,7 @@ window.onload = function (){
         newElement("#future", "div", "item-img hide", "", "", imgHoverArr[4]);
         newElement("#future", "span", "hide", "", spanHoverArr[4]);
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //смещение главных блоков при наведении
     function sizing(){
         let bodyWidth = document.body.clientWidth;
         let items = document.querySelectorAll(".item");
@@ -174,19 +161,8 @@ window.onload = function (){
             el("#contacts").style.left = bodyWidth / 5 * 3;
         });
 
-        // el("#projects").addEventListener('mouseenter', () => {      //ширина projects
-        //     for (let i = 0; i < items.length; i++){
-        //         items[i].style.width = bodyWidth / 8;
-        //     }
-        //     el("#projects").style.width = bodyWidth / 2;
-        // });
-        // el("#projects").addEventListener('mouseleave', () => {
-        //     for (let i = 0; i < items.length; i++){
-        //         items[i].style.width = bodyWidth / 6.25;
-        //     }
-        // });
     }
-    sizing();
+    sizing()
     window.addEventListener('resize', sizing);
 
 
@@ -241,7 +217,13 @@ window.onload = function (){
                 sliderMain.classList.add("hide");
                 slider[i].classList.add("hide");
             });
-        }        
+        }     
+        
+        //адаптивная высота для картинки в комментах
+        getEl("#future").addEventListener('mouseenter', e => {
+            getEl("#future .item-img").style.height = parseInt(document.body.clientWidth / 2.77777778) + "px";
+        });
+
     }
     hoveringInside(".item");
  
@@ -251,131 +233,116 @@ window.onload = function (){
 
 //СЛАЙДЕР
     
-(function sliderMove(){
+    (function sliderMove(){
 
-    let slide = document.querySelectorAll(".slide");
+        let slide = document.querySelectorAll(".slide");
 
-    //анимация окончания
-    getEl(".slider-next").onclick = function() {
-        if (slide[slide.length - 1].classList.contains("active")) {
-            getEl(".slider-btn").animate({transform: ["translate(-42%) rotate(0deg)", "translate(-58%) rotate(0deg)", "translate(-42%) rotate(0deg)"]            
-            }, 150);
-        } else{
-            getEl(".crack").animate({opacity: ["1", "0"]
-            }, 400);
-        }
-      };
-    getEl(".slider-prev").onclick = function() {
-        if (!getEl("#slide2").classList.contains("active")) {
-            getEl(".slider-btn").animate({transform: ["translate(-42%) rotate(180deg)", "translate(-58%) rotate(180deg)", "translate(-42%) rotate(180deg)"]
-            }, 150);
-        } else{
-            getEl(".crack").animate({opacity: ["1", "0"]
-            }, 400);
-        }
-      };
-      
+        //анимация окончания
+        getEl(".slider-next").onclick = function() {
+            if (slide[slide.length - 1].classList.contains("active")) {
+                getEl(".slider-btn").animate({transform: ["translate(-42%) rotate(0deg)", "translate(-58%) rotate(0deg)", "translate(-42%) rotate(0deg)"]            
+                }, 150);
+            } else{
+                getEl(".crack").animate({opacity: ["1", "0"]
+                }, 400);
+            }
+        };
+        getEl(".slider-prev").onclick = function() {
+            if (!getEl("#slide2").classList.contains("active")) {
+                getEl(".slider-btn").animate({transform: ["translate(-42%) rotate(180deg)", "translate(-58%) rotate(180deg)", "translate(-42%) rotate(180deg)"]
+                }, 150);
+            } else{
+                getEl(".crack").animate({opacity: ["1", "0"]
+                }, 400);
+            }
+        };
 
+        let i = 0;
 
-
-    let i = 0;
-
-    function nextSlider(){
-        
-        return function(){
+        function nextSlider(){
             
-            if(i < slide.length - 1){
-                slide[++i].classList.add("active");
+            return function(){
+                
+                if(i < slide.length - 1){
+                    slide[++i].classList.add("active");
+                }
             }
         }
-    }
-    let counterNext = nextSlider();
-    let next = document.querySelector(".slider-next");
-    if(next)next.addEventListener("click", counterNext);
-    
-    function prevSlider(){
+        let counterNext = nextSlider();
+        let next = document.querySelector(".slider-next");
+        if(next)next.addEventListener("click", counterNext);
         
-        return function(){
+        function prevSlider(){
             
-            if(i > 0){
-                slide[i--].classList.remove("active");
+            return function(){
+                
+                if(i > 0){
+                    slide[i--].classList.remove("active");
+                }
+
             }
-
         }
-    }
-    let counterPrev = prevSlider();
-    let prev = document.querySelector(".slider-prev");
-    if(prev)prev.addEventListener("click", counterPrev);
+        let counterPrev = prevSlider();
+        let prev = document.querySelector(".slider-prev");
+        if(prev)prev.addEventListener("click", counterPrev);
     
-    
-
-
-
-
-
-
     //NEXT PREV
-    function sliderBtn(){
+        function sliderBtn(){
 
-        getEl(".slider-btn").style.left = event.clientX - cs("#about", "width").slice(0, -2) + "px";
-        getEl(".slider-btn").style.top = event.clientY - 35 + "px";
+            getEl(".slider-btn").style.left = event.clientX - cs("#about", "width").slice(0, -2) + "px";
+            getEl(".slider-btn").style.top = event.clientY - 35 + "px";
 
-        if(event.clientX < parseInt(cs("#projects", "left").slice(0, -2))){
-            getEl(".slider-btn").style.left = parseInt(cs("#projects", "left").slice(0, -2)) + 36 + "px";
-        }
-        if(event.clientX > parseInt(cs("#tools", "left").slice(0, -2))){
-            getEl(".slider-btn").style.left = parseInt(cs("#tools", "left").slice(0, -2)) - 140 + "px";
-        }
-        if(event.clientY < parseInt(cs("#projects", "height").slice(0, -2)) / 2){
-            getEl(".slider-btn").classList.add("slider-btn-animate-next");
-            getEl(".slider-btn").classList.remove("slider-btn-animate-prev");
-
-            getEl(".dust").classList.toggle("animateDust1", true);
-            getEl(".dust").classList.toggle("animateDust2", false);
-
-            getEl(".slider-btn").style.transform = "translate3d(-50%, 0, 0) rotate(0deg)";
-            getEl(".slider-prev").style.zIndex = "999";
-            getEl(".slider-prev").style.opacity = "0";
-            getEl(".slider-next").style.zIndex = "1000";
-            getEl(".slider-next").style.opacity = "1";
-        }
-        if(event.clientY > parseInt(cs("#projects", "height").slice(0, -2)) / 2){
-            getEl(".slider-btn").classList.add("slider-btn-animate-prev");
-            getEl(".slider-btn").classList.remove("slider-btn-animate-next");
-
-            getEl(".dust").classList.toggle("animateDust1", false);
-            getEl(".dust").classList.toggle("animateDust2", true);
-
-            getEl(".slider-btn").style.transform = "translate3d(-50%, 0, 0) rotate(180deg)";
-            getEl(".slider-prev").style.zIndex = "1000";
-            getEl(".slider-prev").style.opacity = "1";
-            getEl(".slider-next").style.zIndex = "999";
-            getEl(".slider-next").style.opacity = "0";
-        }
-
-        let btnChlds = document.querySelectorAll(".slider-btn *");
-        
-        if(event.clientY < 70 && event.clientX > parseInt(cs("#tools", "left").slice(0, -2)) - 70){
-            getEl(".slider-btn").classList.remove("slider-btn-animate-prev");
-            getEl(".slider-btn").style.display = "none";
-            for(let i = 0; i < btnChlds.length; i++){
-                btnChlds[i].style.display = "none";
+            if(event.clientX < parseInt(cs("#projects", "left").slice(0, -2))){
+                getEl(".slider-btn").style.left = parseInt(cs("#projects", "left").slice(0, -2)) + 36 + "px";
             }
+            if(event.clientX > parseInt(cs("#tools", "left").slice(0, -2))){
+                getEl(".slider-btn").style.left = parseInt(cs("#tools", "left").slice(0, -2)) - 140 + "px";
+            }
+            if(event.clientY < parseInt(cs("#projects", "height").slice(0, -2)) / 2){
+                getEl(".slider-btn").classList.add("slider-btn-animate-next");
+                getEl(".slider-btn").classList.remove("slider-btn-animate-prev");
+
+                getEl(".dust").classList.toggle("animateDust1", true);
+                getEl(".dust").classList.toggle("animateDust2", false);
+
+                getEl(".slider-btn").style.transform = "translate3d(-50%, 0, 0) rotate(0deg)";
+                getEl(".slider-prev").style.zIndex = "999";
+                getEl(".slider-prev").style.opacity = "0";
+                getEl(".slider-next").style.zIndex = "1000";
+                getEl(".slider-next").style.opacity = "1";
+            }
+            if(event.clientY > parseInt(cs("#projects", "height").slice(0, -2)) / 2){
+                getEl(".slider-btn").classList.add("slider-btn-animate-prev");
+                getEl(".slider-btn").classList.remove("slider-btn-animate-next");
+
+                getEl(".dust").classList.toggle("animateDust1", false);
+                getEl(".dust").classList.toggle("animateDust2", true);
+
+                getEl(".slider-btn").style.transform = "translate3d(-50%, 0, 0) rotate(180deg)";
+                getEl(".slider-prev").style.zIndex = "1000";
+                getEl(".slider-prev").style.opacity = "1";
+                getEl(".slider-next").style.zIndex = "999";
+                getEl(".slider-next").style.opacity = "0";
+            }
+
+            let btnChlds = document.querySelectorAll(".slider-btn *");
             
-        } else{
-            getEl(".slider-btn").style.display = "block";
-            for(let i = 0; i < btnChlds.length; i++){
-                btnChlds[i].style.display = "block";
+            if(event.clientY < 70 && event.clientX > parseInt(cs("#tools", "left").slice(0, -2)) - 70){
+                getEl(".slider-btn").classList.remove("slider-btn-animate-prev");
+                getEl(".slider-btn").style.display = "none";
+                for(let i = 0; i < btnChlds.length; i++){
+                    btnChlds[i].style.display = "none";
+                }
+                
+            } else{
+                getEl(".slider-btn").style.display = "block";
+                for(let i = 0; i < btnChlds.length; i++){
+                    btnChlds[i].style.display = "block";
+                }
             }
-        }
+        };
 
-
-
-
-
-    };
-
-    getEl("#projects").addEventListener("mousemove", sliderBtn);
+        getEl("#projects").addEventListener("mousemove", sliderBtn);
     
     }());
 
@@ -719,10 +686,11 @@ window.onload = function (){
             ['right', '0px'],
         ],  
         ['#future .item-img',
+            ['height', '50%'],
             ['max-width', 'initial'],
             ['max-height', 'initial'],
             ['z-index', '-1'],
-            ['border-radius', '0px'], 
+            ['border-radius', '50%'], 
             ['background-color', 'rgba(0, 0, 0, .1)'], 
             ['background-position', 'center'],
             ['background-size', 'initial'],
@@ -781,6 +749,5 @@ window.onload = function (){
       keyFrame();
 
 
-
 }
-
+}
