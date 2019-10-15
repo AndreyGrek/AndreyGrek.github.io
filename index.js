@@ -78,7 +78,7 @@ window.onload = function (){
         newElement("#projects", "div", "item-img hide", "", "", imgHoverArr[1]);
         newElement("#projects", "span", "hide", "", spanHoverArr[1]);
         newElement("#projects", "div", "main-slide hide");
-            newElement(".main-slide", "h2", "slides-title hide", "", "My best jobs");
+            newElement(".main-slide", "h2", "slides-title hide", "", "My interesting projects");
             newElement(".main-slide", "div", "slider-btn hide");
                 newElement(".slider-btn", "div", "slider-prev hide");
                 newElement(".slider-btn", "div", "slider-next hide");
