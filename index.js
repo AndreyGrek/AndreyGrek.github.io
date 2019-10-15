@@ -700,6 +700,9 @@ window.onload = function (){
         ],  
 
         //CONTACTS
+        ['#contacts h2',
+            ['text-shadow', '0px 0px 6px #fff'],
+        ],
         ['#contacts .item-img',
             ['max-width', 'initial'],
             ['max-height', 'initial'],
