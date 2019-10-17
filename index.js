@@ -36,8 +36,12 @@ window.onload = function (){
         return window.getComputedStyle(getEl(el)).getPropertyValue(prop);
     }
 
+
+
+
+
     //конструктор элементов
-    const newElement = function(parrent, tag, className, id, text, urlBg, attr, attrValue, attr2, attrValue2, attr3, attrValue3){
+    const newElement = function(parrent, tag, className, id, text, urlBg, sA){
         let parrentEl = document.querySelector(parrent); //присваиваем родителя
         let el = document.createElement(tag); //создаём новый элемент
         if (className){
@@ -52,20 +56,16 @@ window.onload = function (){
         if (urlBg){
                 el.style = `background-image: url(${urlBg})`;
         }
-        if (attr){
-            el.setAttribute(attr, attrValue);
-        }
-        if (attr2){
-            el.setAttribute(attr2, attrValue2);
-        }
-        if (attr3){
-            el.setAttribute(attr3, attrValue3);
+        if (sA){
+            el.setAttribute(sA.attribute1, sA.value1);
+            el.setAttribute(sA.attribute2, sA.value2);
+            el.setAttribute(sA.attribute3, sA.value3);
         }
         parrentEl.append(el); //выводим в DOM
     }
     
     newElement("head", "title", "", "", "Resume");
-    newElement("head", "link", "", "", "", "", "rel", "shortcut icon", "href", "img/favicon.ico", "type", "image/png");
+    newElement("head", "link", "", "", "", "", {attribute1: "rel", value1: "shortcut icon", attribute2: "href", value2: "img/favicon.ico", attribute3: "type", value3: "image/png"});
     newElement("body", "main");
     newElement("main", "section", "item", "about");
         newElement("#about", "h2", "", "", h2Arr[0]);
@@ -85,11 +85,11 @@ window.onload = function (){
                 newElement(".slider-btn", "div", "dust hide");
                 newElement(".slider-btn", "div", "crack hide");
             newElement(".main-slide", "div", "slide active hide", "slide1");
-                newElement("#slide1", "a", "href hide", "", "Check site", "", "href", "https://balagan-city.ru/#l-flag", "target", "_blank");
+                newElement("#slide1", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://balagan-city.ru/#l-flag"});
             newElement(".main-slide", "div", "slide not-active hide", "slide2");
-                newElement("#slide2", "a", "href hide", "", "Check site", "", "href", "http://google.com", "target", "_blank");
+                newElement("#slide2", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://google.com"});
             newElement(".main-slide", "div", "slide not-active hide", "slide3");
-                newElement("#slide3", "a", "href hide", "", "Check site", "", "href", "https://google.com", "target", "_blank");
+                newElement("#slide3", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://google.com"});
     newElement("main", "section", "item", "tools");
         newElement("#tools", "h2", "", "", h2Arr[2]);
         newElement("#tools", "img");
@@ -164,11 +164,6 @@ window.onload = function (){
     }
     sizing()
     window.addEventListener('resize', sizing);
-
-
-
-
-
 
 
 
@@ -395,10 +390,6 @@ window.onload = function (){
 
 
 
-    
-
-
-
 
 
     //СТИЛИ
@@ -407,10 +398,8 @@ window.onload = function (){
       
         styleEl.type = 'text/css';
 
-        // Append <style> element to <head>
         document.head.appendChild(styleEl);
       
-        // Grab style element's sheet
         var styleSheet = styleEl.sheet;
       
         for (var i = 0; i < rules.length; i++) {
@@ -418,7 +407,7 @@ window.onload = function (){
               rule = rules[i], 
               selector = rule[0], 
               propStr = '';
-          // If the second argument of a rule is an array of arrays, correct our variables.
+
           if (Array.isArray(rule[1][0])) {
             rule = rule[1];
             j = 0;
@@ -429,7 +418,7 @@ window.onload = function (){
             propStr += prop[0] + ': ' + prop[1] + (prop[2] ? ' !important' : '') + ';\n';
           }
       
-          // Insert CSS Rule
+
           styleSheet.insertRule(selector + '{' + propStr + '}', styleSheet.cssRules.length);
         }
       }
@@ -699,6 +688,9 @@ window.onload = function (){
       ]);
 
 
+
+
+      
       //CSS KEYFRAMES
       function keyFrame(){
         var style = document.createElement('style');
