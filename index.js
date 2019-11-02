@@ -1,6 +1,6 @@
 "use strict";
 
-var nodeDoctype = document.implementation.createDocumentType(
+let nodeDoctype = document.implementation.createDocumentType(
     'html',
     '-//W3C//DTD XHTML 1.0 Transitional//EN',
     'https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtdd'
@@ -57,15 +57,19 @@ window.onload = function (){
                 el.style = `background-image: url(${urlBg})`;
         }
         if (sA){
-            el.setAttribute(sA.attribute1, sA.value1);
-            el.setAttribute(sA.attribute2, sA.value2);
-            el.setAttribute(sA.attribute3, sA.value3);
+            function setAttribute(){
+                console.log(arguments[0])
+                for(let key in arguments[0]){
+                    el.setAttribute(key, arguments[0][key]);
+                }
+            }
+            setAttribute(sA);
         }
         parrentEl.append(el); //выводим в DOM
     }
     
     newElement("head", "title", "", "", "Resume");
-    newElement("head", "link", "", "", "", "", {attribute1: "rel", value1: "shortcut icon", attribute2: "href", value2: "img/favicon.ico", attribute3: "type", value3: "image/png"});
+    newElement("head", "link", "", "", "", "", {rel: "shortcut icon", href: "img/favicon.ico", type: "image/png"});
     newElement("body", "main");
     newElement("main", "section", "item", "about");
         newElement("#about", "h2", "", "", h2Arr[0]);
@@ -85,11 +89,11 @@ window.onload = function (){
                 newElement(".slider-btn", "div", "dust hide");
                 newElement(".slider-btn", "div", "crack hide");
             newElement(".main-slide", "div", "slide active hide", "slide1");
-                newElement("#slide1", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://balagan-city.ru/#l-flag"});
+                newElement("#slide1", "a", "href hide", "", "Check site", "", {target: "_blank", href: "https://balagan-city.ru/#l-flag"});
             newElement(".main-slide", "div", "slide not-active hide", "slide2");
-                newElement("#slide2", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://google.com"});
+                newElement("#slide2", "a", "href hide", "", "Check site", "", {target: "_blank", href: "https://google.com"});
             newElement(".main-slide", "div", "slide not-active hide", "slide3");
-                newElement("#slide3", "a", "href hide", "", "Check site", "", {attribute1: "target", value1: "_blank", attribute2: "href", value2: "https://google.com"});
+                newElement("#slide3", "a", "href hide", "", "Check site", "", {target: "_blank", href: "https://google.com"});
     newElement("main", "section", "item", "tools");
         newElement("#tools", "h2", "", "", h2Arr[2]);
         newElement("#tools", "img");
@@ -216,7 +220,7 @@ window.onload = function (){
         
         //адаптивная высота для картинки в комментах
         getEl("#future").addEventListener('mouseenter', e => {
-            getEl("#future .item-img").style.height = parseInt(document.body.clientWidth / 2.77777778) + "px";
+            getEl("#future .item-img").style.height = parseInt(document.body.clientWidth / 2.77777778 / 1.3333) + "px";
         });
 
     }
@@ -675,6 +679,7 @@ window.onload = function (){
             ['right', '0px'],
         ],  
         ['#future .item-img',
+            ['width', '75%'],
             ['height', '50%'],
             ['max-width', 'initial'],
             ['max-height', 'initial'],
