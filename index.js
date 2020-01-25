@@ -12,9 +12,6 @@ let nodeDoctype = document.implementation.createDocumentType(
    }
    document.write('<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"></head><body></body></html>');
 
-if(document.body.clientWidth < 980){
-    document.body.innerHTML = "Mobile version of the site is under construction. Please come in from the desktop device";
-} else{
 window.onload = function (){
 
     //оглавление разделов 
@@ -109,6 +106,9 @@ window.onload = function (){
         newElement("#future", "div", "item-img hide", "", "", imgHoverArr[4]);
         newElement("#future", "span", "hide", "", spanHoverArr[4]);
     
+
+
+
     //смещение главных блоков при наведении
     function sizing(){
         let bodyWidth = document.body.clientWidth;
@@ -124,33 +124,74 @@ window.onload = function (){
 
         document.body.addEventListener('mouseenter', () => {    //ширина при наведении на body
             for (let i = 0; i < items.length; i++){
-                items[i].style.width = bodyWidth / 6.25;
+                if(bodyWidth <= 768){
+                    items[i].style.width = bodyWidth / 10;
+                } else{
+                    items[i].style.width = bodyWidth / 6.25;
+                }
             }
         });
 
-        //смещение влево при наведении отдельного item'а
-        function hoveringItems(id, arg3 = bodyWidth / 6.25 * 3, arg2 = bodyWidth / 6.25 * 2, arg1 = bodyWidth / 6.25){
+        //смещение в сторону при наведении отдельного item'а
+        function hoveringItems(id, arg1 = bodyWidth / 6.25 * 3, arg2 = bodyWidth / 6.25 * 2, arg3 = bodyWidth / 6.25){
             id.addEventListener('mouseenter', () => {
-                el("#projects").style.left = arg1;
+                el("#projects").style.left = arg3;
                 el("#tools").style.left = arg2;
-                el("#contacts").style.left = arg3;
+                el("#contacts").style.left = arg1;
             });
         }
-        hoveringItems(el("#about"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 2.77777778);
-        hoveringItems(el("#projects"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 6.25);
-        hoveringItems(el("#tools"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2));
-        hoveringItems(el("#contacts")); 
-        hoveringItems(el("#future"));
+
+        //смещение about
+        if(bodyWidth <= 768){
+            hoveringItems(el("#about"), (bodyWidth / 1.666666667) + (bodyWidth / 10 * 2), (bodyWidth / 1.666666667) + (bodyWidth / 10), bodyWidth / 1.666666667);
+        } else{
+            hoveringItems(el("#about"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 2.77777778);
+        }
+        
+        //смещение projects
+        if(bodyWidth <= 768){
+            hoveringItems(el("#projects"), (bodyWidth / 1.666666667) + (bodyWidth / 10 * 2), (bodyWidth / 1.666666667) + (bodyWidth / 10), bodyWidth / 10);
+        } else{
+            hoveringItems(el("#projects"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2), (bodyWidth / 2.77777778) + (bodyWidth / 6.25), bodyWidth / 6.25);
+        }
+        
+        //смещение tools
+        if(bodyWidth <= 768){
+            hoveringItems(el("#tools"), (bodyWidth / 1.666666667) + (bodyWidth / 10 * 2), bodyWidth / 10 * 2, bodyWidth / 10);
+        } else{
+            hoveringItems(el("#tools"), (bodyWidth / 2.77777778) + (bodyWidth / 6.25 * 2));
+        }
+
+        //смещение contacts
+        if(bodyWidth <= 768){
+            hoveringItems(el("#contacts"), bodyWidth / 10 * 3, bodyWidth / 10 * 2, bodyWidth / 10);
+        } else{
+            hoveringItems(el("#contacts"));
+        }
+
+        //смещение future
+        if(bodyWidth <= 768){
+            hoveringItems(el("#future"), bodyWidth / 10 * 3, bodyWidth / 10 * 2, bodyWidth / 10);
+        } else{
+            hoveringItems(el("#future"));
+        }
+    
      
         for(let i = 0; i < items.length; i++){                      //ширина при наведении и покидании отдельного item'а
             items[i].addEventListener('mouseenter', () => {
-            
-                items[i].style.width = bodyWidth / 2.77777778;
+                if(bodyWidth <= 768){
+                    items[i].style.width = bodyWidth / 1.666666667;
+                } else{
+                    items[i].style.width = bodyWidth / 2.77777778;
+                }
 
             });
             items[i].addEventListener('mouseleave', () => {
-            
-                items[i].style.width = bodyWidth / 6.25;
+                if(bodyWidth <= 768){
+                    items[i].style.width = bodyWidth / 10;
+                } else{
+                    items[i].style.width = bodyWidth / 6.25;
+                }
 
             });
         }
@@ -166,7 +207,7 @@ window.onload = function (){
 
     }
     sizing()
-    window.addEventListener('resize', sizing);
+    
 
 
 
@@ -397,16 +438,16 @@ window.onload = function (){
 
     //СТИЛИ
     function addStylesheetRules (rules) {
-        var styleEl = document.createElement('style');
+        let styleEl = document.createElement('style');
       
         styleEl.type = 'text/css';
 
         document.head.appendChild(styleEl);
       
-        var styleSheet = styleEl.sheet;
+        let styleSheet = styleEl.sheet;
       
-        for (var i = 0; i < rules.length; i++) {
-          var j = 1, 
+        for (let i = 0; i < rules.length; i++) {
+          let j = 1, 
               rule = rules[i], 
               selector = rule[0], 
               propStr = '';
@@ -416,8 +457,8 @@ window.onload = function (){
             j = 0;
           }
       
-          for (var pl = rule.length; j < pl; j++) {
-            var prop = rule[j];
+          for (let pl = rule.length; j < pl; j++) {
+            let prop = rule[j];
             propStr += prop[0] + ': ' + prop[1] + (prop[2] ? ' !important' : '') + ';\n';
           }
       
@@ -431,6 +472,8 @@ window.onload = function (){
             ['box-sizing', 'border-box'],
         ],
         ['body', 
+            ['width', '100vw'],
+            ['height', '100vh'],
             ['margin', '0px'],
             ['overflow', 'hidden'],
         ],
@@ -697,9 +740,9 @@ window.onload = function (){
       
       //CSS KEYFRAMES
       function keyFrame(){
-        var style = document.createElement('style');
+        let style = document.createElement('style');
         style.type = 'text/css';
-        var keyFrames = '\
+        let keyFrames = '\
         @keyframes bumpIn {\
             from {\
                 transform: scaleY(-1) translate3d(-50%, 0, 0);\
@@ -745,5 +788,4 @@ window.onload = function (){
       keyFrame();
 
 
-}
 }
