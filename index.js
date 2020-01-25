@@ -55,6 +55,7 @@ window.onload = function (){
         }
         if (sA){
             function setAttribute(){
+                console.log(arguments[0])
                 for(let key in arguments[0]){
                     el.setAttribute(key, arguments[0][key]);
                 }
