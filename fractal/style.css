@@ -6,7 +6,7 @@ body{
   overflow: hidden;
 }
 #canvas{
-
+  overflow: auto;
 }
 #count{
   position: absolute;

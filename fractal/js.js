@@ -5,8 +5,8 @@ function $(el){
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-canvas.width = document.body.clientWidth;
-canvas.height = window.innerHeight;
+// canvas.width = document.body.clientWidth;
+// canvas.height = window.innerHeight;
 
 //work place________________________________
 
