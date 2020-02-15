@@ -126,8 +126,3 @@ $("#stop").addEventListener("click", function() {
   this.classList.add("off");
   $("#start").classList.remove("off");
 });
-
-  
-
-
-//test
